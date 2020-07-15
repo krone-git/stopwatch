@@ -53,6 +53,18 @@ class StopWatch:
             self._start = datetime.datetime.now()
         return self
 
+    def __enter__(self):
+        self.start()
+        return self
+
+    def __exit__(self, *args):
+        self.stop()
+
+    def __repr__(self):
+        return str(self._duration)
+
+    def __str__(self):
+        return str(self._duration)
 
 
 if __name__ == "__main__":
@@ -71,6 +83,10 @@ if __name__ == "__main__":
     time.sleep(1)
     s.stop()
     print(s.total_seconds)
+
+    with s:
+        time.sleep(1)
+    print(s)
 
     s.stop()
     print(s.total_seconds)
